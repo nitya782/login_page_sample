@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quore b2b Marketing</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -34,15 +35,16 @@
   <div class="captcha-modal" id="captcha-modal">
     <div class="captcha-box">
       <h3>Verify You're Human</h3>
-      <p id="captcha-question"></p>
-      <input type="text" id="captcha-answer" placeholder="Your answer" />
-      <div class="captcha-actions">
-        <button id="verify-btn">Verify</button>
-        <button id="cancel-btn">Cancel</button>
-      </div>
+      <form id="captcha-form" method="POST">
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6Lfg1RsrAAAAAI7NQl0iX89osVj9Hdd67YH0JHZW"></div>
+        <br />
+        <button type="button" id="captcha-submit-btn">Submit</button>
+      </form>
     </div>
   </div>
 
   <script src="app.js"></script>
 </body>
 </html>
+
