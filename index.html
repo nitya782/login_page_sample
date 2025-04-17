@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quore b2b Marketing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>QUORE B2B MARKETING</h2>
+    <form id="contact-form">
+      <input type="hidden" name="access_key" value="2033055e-d24e-47ab-9caa-69ef0ef56b5f" />
+      
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" placeholder="e.g. Nitya Sharma" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" placeholder="e.g. yourname@email.com" required />
+
+      <label for="subject">Subject</label>
+      <input type="text" name="subject" id="subject" placeholder="Topic of your message" required />
+
+      <label for="message">Your Message</label>
+      <textarea name="message" id="message" rows="6" placeholder="Write your detailed message here..." required></textarea>
+
+      <button type="submit" id="submit-btn">Send Message</button>
+      <div id="form-alert" class="alert"></div>
+    </form>
+  </div>
+
+  <!-- CAPTCHA Modal -->
+  <div class="captcha-modal" id="captcha-modal">
+    <div class="captcha-box">
+      <h3>Verify You're Human</h3>
+      <p id="captcha-question"></p>
+      <input type="text" id="captcha-answer" placeholder="Your answer" />
+      <div class="captcha-actions">
+        <button id="verify-btn">Verify</button>
+        <button id="cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
