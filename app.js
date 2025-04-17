@@ -1,27 +1,21 @@
 const form = document.getElementById('contact-form');
 const alertBox = document.getElementById('form-alert');
 const captchaModal = document.getElementById('captcha-modal');
-const captchaQuestion = document.getElementById('captcha-question');
-const captchaAnswer = document.getElementById('captcha-answer');
-const verifyBtn = document.getElementById('verify-btn');
-const cancelBtn = document.getElementById('cancel-btn');
+const captchaSubmitBtn = document.getElementById('captcha-submit-btn');
 
-let num1 = 0, num2 = 0;
-
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // Generate CAPTCHA
-  num1 = Math.floor(Math.random() * 10) + 1;
-  num2 = Math.floor(Math.random() * 10) + 1;
-  captchaQuestion.textContent = `What is ${num1} + ${num2}?`;
-  captchaAnswer.value = '';
+  // Show CAPTCHA modal
   captchaModal.style.display = 'flex';
 });
 
-verifyBtn.addEventListener('click', async () => {
-  const userAnswer = parseInt(captchaAnswer.value);
-  if (userAnswer === num1 + num2) {
+captchaSubmitBtn.addEventListener('click', async () => {
+  const response = grecaptcha.getResponse();
+
+  if (response.length === 0) {
+    alert('Please complete the reCAPTCHA to proceed.');
+  } else {
     captchaModal.style.display = 'none';
 
     const formData = new FormData(form);
@@ -29,12 +23,12 @@ verifyBtn.addEventListener('click', async () => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
-    const response = await fetch("https://api.web3forms.com/submit", {
+    const apiResponse = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData
     });
 
-    const result = await response.json();
+    const result = await apiResponse.json();
 
     if (result.success) {
       alertBox.textContent = "✅ Thank you! Your message has been sent.";
@@ -53,11 +47,5 @@ verifyBtn.addEventListener('click', async () => {
     setTimeout(() => {
       alertBox.style.display = 'none';
     }, 5000);
-  } else {
-    alert("Wrong answer! Please try again.");
   }
-});
-
-cancelBtn.addEventListener('click', () => {
-  captchaModal.style.display = 'none';
 });
